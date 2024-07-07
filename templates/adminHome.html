@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Blood Bank Management System</title>
+    <!-- <link rel="stylesheet" href="adminHome.css"> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, rgb(136, 46, 46) 50%, rgb(232, 138, 138) 50%);
+        }
+
+        .dashboard {
+            width: 200px;
+            background: #333; /* Black background color */
+            color: #fff;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+        }
+
+        .dashboard ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .dashboard li {
+            margin-bottom: 15px;
+        }
+
+        .dashboard a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .dashboard a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: #090909;
+        }
+
+        .main {
+            position: relative;
+            margin-left: 200px; /* Adjust according to the dashboard width */
+            background: linear-gradient(to bottom right, rgb(136, 46, 46) 50%, rgb(232, 138, 138) 50%);
+            background-position: center;
+            background-size: cover;
+            height: 109vh;
+        }
+
+        .header-wrap {
+            background-color: rgba(255, 0, 0, 0.82);
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        /* .logo-container {
+            /* background-color: transparent;  */
+            /* text-align: center;
+            margin-top: 20px;  */
+        /* } */ 
+
+        .logo {
+            font-size: 20px;
+            color: #fff;
+        }
+
+        /* .navbar { */
+            /* position: fixed;
+                top: 0;
+                right: 0;
+                padding: 20px; */
+        /* } */
+
+        .menu ul {
+            list-style: none;
+            /* margin: 0; */
+            /* padding: 0; */
+        }
+
+        .menu li {
+            display: inline;
+            /* margin-left: 20px; */
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 19px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .menu a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            color: #090909;
+        }
+
+        .footer {
+            background-color: rgb(86, 15, 15);
+            color: white;
+            padding: 20px 20px;
+            text-align: center;
+            /* position: fixed; */
+            /* bottom: 0; */
+            width: 100%;
+        }
+
+        .admin-heading {
+            text-align: center;
+            margin-top: 50px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .donor-request-section {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between; /* Spread boxes evenly in the row */
+            margin-bottom: 20px; /* Increase margin between rows */
+        }
+
+        .box {
+            width: 100px; /* Adjust width of boxes in first and second row */
+            height: 100px; /* Adjust height of boxes in first and second row */
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            font-size: 18px;
+            border-radius: 5px;
+            padding: 10px; /* Add padding to create space for + and - buttons */
+            position: relative; /* Position relative for absolute positioning of buttons */
+            margin-right: 10px; /* Add margin between boxes */
+        }
+
+        .bigger-box {
+            width: 150px; /* Adjust width of boxes in third row */
+            height: 100px; /* Adjust height of boxes in third row */
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            font-size: 18px;
+            border-radius: 5px;
+            padding: 10px; /* Add padding to create space for + and - buttons */
+            position: relative; /* Position relative for absolute positioning of buttons */
+            margin-right: 10px; /* Add margin between boxes */
+        }
+
+        .number-control {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%); /* Adjust to center buttons */
+        }
+
+        .number-control button {
+            background-color: #555;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin: 0 2px; /* Add space between buttons */
+        }
+
+        .number-control button:hover {
+            background-color: #777;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dashboard section -->
+    <div class="dashboard">
+        <ul>
+            <li><a href="adminHome.html">Home</a></li>
+            <li><a href="#">Donor</a></li>
+            <li><a href="#">User</a></li>
+            <li><a href="#">Donations</a></li>
+            <li><a href="#">Blood Request</a></li>
+            <li><a href="#">Request History</a></li>
+            <li><a href="#">Blood Stock</a></li>
+        </ul>
+    </div>
+
+    <!-- Main container -->
+    <div class="main">
+        <!-- Logo -->
+        <div class="header-wrap">
+            <div class="logo-container">
+                <h2 class="logo">Blood Bank Management System</h2>
+            </div>
+
+            <!-- Navbar -->
+            <div class="navbar">
+                <div class="menu">
+                    <ul>
+                        <li><a href="#" class="logout">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content from a.html -->
+        <h1 class="admin-heading">Admin</h1>
+        <div class="donor-request-section">
+            <!-- Upper row -->
+            <div class="row">
+                <div class="box">
+                    A+ = <span class="number-place" id="aplus">0</span>
+                    <div class="number-control">
+                        <button onclick="decrease('aplus')">-</button>
+                        <button onclick="increase('aplus')">+</button>
+                    </div>
+                </div>
+                <div class="box">
+                    B+ = <span class="number-place" id="bplus">0</span>
+                    <div class="number-control">
+                        <button onclick="decrease('bplus')">-</button>
+                        <button onclick="increase('bplus')">+</button>
+                    </div>
+                </div>
+                <div class="box">
+                    O+ = <span class="number-place" id="oplus">0</span>
+                    <div class="number-control">
+                        <button onclick="decrease('oplus')">-</button>
+                        <button onclick="increase('oplus')">+</button>
+                    </div>
+                </div>
+                <div class="box">
+                    AB+ = <span class="number-place" id="abplus">0</span>
+                    <div class="number-control">
+                        <button onclick="decrease('abplus')">-</button>
+                        <button onclick="increase('abplus')">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second row -->
+            <div class="row">
+                <div class="box">
+                    A- = <span class="number-place" id="aminus">0</span>
+                    <div class="number-control">
+                        <button onclick="decrease('aminus')">-</button>
+                        <button onclick="increase('aminus')">+</button>
+                    </div>
+                </div>
+                <div class="box">
+                    B- = <span class="number-place" id="bminus">0</span>
+                    <div class="number-control">
+                        <button onclick="decrease('bminus')">-</button>
+                        <button onclick="increase('bminus')">+</button>
+                    </div>
+                </div>
+                <div class="box">
+                    O- = <span class="number-place" id="ominus">0</span>
+                    <div class="number-control">
+                        <button onclick="decrease('ominus')">-</button>
+                        <button onclick="increase('ominus')">+</button>
+                    </div>
+                </div>
+                <div class="box">
+                    AB- = <span class="number-place" id="abminus">0</span>
+                    <div class="number-control">
+                        <button onclick="decrease('abminus')">-</button>
+                        <button onclick="increase('abminus')">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Third row -->
+            <div class="row bigger-row">
+                <div class="bigger-box">
+                    Total Donors = <span class="number-place" id="totaldonors">0</span>
+                    <div class="number-control">
+                        <button onclick="decrease('totaldonors')">-</button>
+                        <button onclick="increase('totaldonors')">+</button>
+                    </div>
+                </div>
+                <div class="bigger-box">
+                    Total Requests = <span class="number-place" id="totalrequests">0</span>
+                    <div class="number-control">
+                        <button onclick="decrease('totalrequests')">-</button>
+                        <button onclick="increase('totalrequests')">+</button>
+                    </div>
+                </div>
+                <div class="bigger-box">
+                    Approved Requests = <span class="number-place" id="approvedrequests">0</span>
+                    <div class="number-control">
+                        <button onclick="decrease('approvedrequests')">-</button>
+                        <button onclick="increase('approvedrequests')">+</button>
+                    </div>
+                </div>
+                <div class="bigger-box">
+                    Total Blood unit (in ml) = <span class="number-place" id="totalblood">0</span>
+                    <div class="number-control">
+                        <button onclick="decrease('totalblood')">-</button>
+                        <button onclick="increase('totalblood')">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Blood Bank Management System. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for increasing and decreasing numbers -->
+    <script>
+        function increase(id) {
+            var element = document.getElementById(id);
+            var number = parseInt(element.innerHTML);
+            element.innerHTML = number + 1;
+        }
+
+        function decrease(id) {
+            var element = document.getElementById(id);
+            var number = parseInt(element.innerHTML);
+            if (number > 0) {
+                element.innerHTML = number - 1;
+            }
+        }
+    </script>
+</body>
+</html>

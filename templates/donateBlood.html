@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Blood Bank Management System</title>
+  </head>
+  <body>
+    <!-- Dashboard section -->
+    <div class="dashboard">
+      <ul>
+        <li><a href="{% url 'donorHome' %}">Home</a></li>
+        <li><a href="{% url 'donateBlood' %}">Donate Blood</a></li>
+        <li><a href="{% url 'donationHistory' %}">Donation History</a></li>
+        <!-- <li><a href="#">Donations</a></li> -->
+      </ul>
+    </div>
+
+    <!-- Main container -->
+    <div class="main">
+      <!-- <div class="main-wrap"> -->
+      <!-- Logo -->
+      <div class="logo-container">
+        <h2 class="logo">Blood Bank Management System</h2>
+      </div>
+
+      <!-- Navbar -->
+      <div class="navbar">
+        <div class="menu">
+          <ul>
+            <li><a href="{% url 'logout' %}" class="logout">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- </div> -->
+    </div>
+
+    <!-- Form section -->
+    <div class="form">
+      <h2>Donate Blood</h2>
+      <!-- Heading for the signup form -->
+      <form method="post">
+        {% csrf_token %}
+        <input type="text" id="donorName" name="donorName" placeholder="Donor Name" required/>
+        <input type="text" id="bloodGroup" name="bloodGroup" placeholder="Blood Group" required/>
+        <input type="number" id="unit" name="unit" placeholder="Unit (in ml)" required/>
+        <input type="number" id="age" name="age" placeholder="Age" required/>
+        <button type="submit" class="btnn">Donate</button>
+    </form>
+    
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2024 Blood Bank Management System. All rights reserved.</p>
+    </footer>
+
+    <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+  }
+  
+  body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, rgb(136, 46, 46) 50%, rgb(232, 138, 138) 50%);
+  }
+  
+  .main {
+      position: relative;
+      margin-left: 200px; /* Adjust according to the dashboard width */
+  }
+  
+  .main {
+      background: linear-gradient(to bottom right, rgb(136, 46, 46) 50%, rgb(232, 138, 138) 50%);
+      background-position: center;
+      background-size: cover;
+      height: 109vh;
+      position: relative;
+  }
+  
+  .dashboard {
+      width: 200px;
+      background: #333; /* Black background color */
+      color: #fff;
+      padding: 20px;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      overflow-y: auto;
+  }
+  
+  .dashboard ul {
+      list-style: none;
+      padding: 0;
+  }
+  
+  .dashboard li {
+      margin-bottom: 15px;
+  }
+  
+  .dashboard a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 18px;
+      display: block;
+      padding: 10px;
+      border-radius: 5px;
+      transition: background 0.3s ease-in-out;
+  }
+  
+  .dashboard a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      color: #090909;
+  }
+  
+  .logo-container {
+      background-color: transparent; /* No background color */
+      text-align: center;
+      margin-top: 0px; /* Adjust as needed */
+  }
+  
+  .logo {
+      font-size: 24px;
+      color: #fff;
+  }
+  
+  .navbar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      padding: 20px;
+  }
+  
+  .menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+  }
+  
+  .menu li {
+      display: inline;
+      margin-left: 20px;
+  }
+  
+  .menu a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 18px;
+      transition: background 0.3s ease-in-out;
+  }
+  
+  .menu a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 5px;
+      color: #090909;
+  }
+  
+  .footer {
+      background-color: rgb(86, 15, 15);
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+  }
+  
+  .form {
+      width: 300px;
+      height: 350px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8)50%, rgba(0, 0, 0, 0.8)50%);
+      position: absolute;
+      top: 160px;
+      left: 700px;
+      border-radius: 10px;
+      padding: 25px;
+  }
+  
+  .form h2 {
+      width: 230px;
+      font-family: sans-serif;
+      text-align: center;
+      color: rgb(136, 46, 46);
+      font-size: 24px;
+      border-radius: 10px;
+      margin: 2px;
+      padding: 8px;
+  }
+  
+  .form input {
+      
+      width: 90%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid rgb(136, 46, 46);
+      background: transparent;
+      color: #fff;
+      font-size: 16px;
+      margin-top: 10px;
+      left: 80px;
+  }
+  
+  .form input:focus {
+      outline: none;
+  }
+  
+  .btnn {
+      width: 225px;
+      height: 40px;
+      background: rgb(136, 46, 46);
+      border: none;
+      margin-top: 20px;
+      font-size: 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      color: #fff;
+      transition: 0.4s ease;
+  }
+  
+  .btnn:hover {
+      background: #fff;
+      color: rgb(136, 46, 46);
+  }
+  
+  .btnn a {
+      text-decoration: none;
+      color: #0c0000;
+  }
+  
+  .form .link a {
+      text-decoration: none;
+      color: rgb(136, 46, 46);
+      font-size: 17px;
+      padding: 40px;
+  }
+  
+  
+  .form  label {
+      /* width: 230px;
+      font-family: Arial, Helvetica, sans-serif;
+      display: block;
+      margin-bottom: 5px;
+      color: #fff;
+      font-size: 16px; */
+      width: 230px;
+      font-family: poppins;
+      text-align: center;
+      color: rgb(248, 244, 244);
+      font-size: 20px;
+  }
+  
+  .form select {
+      width: 100px;
+      height: 25px;
+      background: rgb(136, 46, 46);
+      border: none;
+      margin-top: 10px;
+      font-size: 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      color: #fff;
+      transition: 0.4s ease;
+      margin-bottom: 20px;
+  }
+  
+  .btnn:hover,
+  .form .userType select:hover {
+      background: #fff;
+      color: rgb(136, 46, 46);
+  }
+  
+
+
+</style>
+  </body>
+</html>

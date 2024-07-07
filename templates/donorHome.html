@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Blood Bank Management System</title>
+    <!-- <link rel="stylesheet" href="donorHome.css"> -->
+</head>
+<body>
+    <!-- Dashboard section -->
+    <div class="dashboard">
+        <ul>
+            <li><a href="{% url 'donorHome' %}">Home</a></li>
+            <li><a href="{% url 'donateBlood' %}">Donate Blood</a></li>
+            <li><a href="{% url 'donationHistory' %}">Donation History</a></li>
+            <!-- <li><a href="#">Donations</a></li> -->
+
+        </ul>
+    </div>
+
+    <!-- Main container -->
+    <div class="main">
+        <!-- Logo -->
+        <div class="logo-container">
+            <h2 class="logo">Blood Bank Management System</h2>
+        </div>
+
+        <!-- Navbar -->
+        <div class="navbar">
+            <div class="menu">
+                <ul>
+                    <li><a href="{% url 'logout' %}" class="logout">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Content from a.html -->
+        <h1 class="donor-heading">Donor</h1>
+        <div class="donor-request-section">
+            <!-- Upper row -->
+            <form method="post">
+            {% csrf_token %}
+            <div class="row">
+                <!-- <div class="boxa">
+                    Request Mode = <span class="number-place" id="requestMode">0</span>
+                    <div class="number-control">
+                        <button onclick="decrease('requestMode')">-</button>
+                        <button onclick="increase('requestMode')">+</button>
+                    </div>
+                </div> -->
+                <div class="boxb">
+                    Pending Requests = <span class="number-place" id="pendingRequests">{{ total_pending_requests }}</span>
+                    <!-- <div class="number-control">
+                        <button onclick="decrease('pendingRequests')">-</button>
+                        <button onclick="increase('pendingRequests')">+</button>
+                    </div> -->
+                </div>
+                <!-- <div class="boxc">
+                    Approved Requests = <span class="number-place" id="approvedRequests">0</span>
+                    <div class="number-control">
+                        <button onclick="decrease('approvedRequests')">-</button>
+                        <button onclick="increase('approvedRequests')">+</button>
+                    </div>
+                </div>
+                <div class="boxd">
+                    Rejected Requests = <span class="number-place" id="rejectedRequests">0</span>
+                    <div class="number-control">
+                        <button onclick="decrease('rejectedRequests')">-</button>
+                        <button onclick="increase('rejectedRequests')">+</button>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</form>
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Blood Bank Management System. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for increasing and decreasing numbers
+    <script>
+        function increase(id) {
+            var element = document.getElementById(id);
+            var number = parseInt(element.innerHTML);
+            element.innerHTML = number + 1;
+        }
+
+        function decrease(id) {
+            var element = document.getElementById(id);
+            var number = parseInt(element.innerHTML);
+            if (number > 0) {
+                element.innerHTML = number - 1;
+            }
+        }
+    </script> -->
+
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom right, rgb(136, 46, 46) 50%, rgb(232, 138, 138) 50%);
+}
+
+.dashboard {
+    width: 200px;
+    background: #333; /* Black background color */
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
+}
+
+.dashboard ul {
+    list-style: none;
+    padding: 0;
+}
+
+.dashboard li {
+    margin-bottom: 15px;
+}
+
+.dashboard a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+}
+
+.dashboard a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: #090909;
+}
+
+.main {
+    position: relative;
+    margin-left: 200px; /* Adjust according to the dashboard width */
+    background: linear-gradient(to bottom right, rgb(136, 46, 46) 50%, rgb(232, 138, 138) 50%);
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh;
+    padding-top: 50px; /* Adjust top padding to avoid content overlapping with fixed navbar */
+}
+
+.logo-container {
+    background-color: transparent; /* No background color */
+    text-align: center;
+}
+
+.logo {
+    font-size: 24px;
+    color: #fff;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 20px;
+}
+
+.menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    display: inline;
+    margin-left: 20px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    transition: background 0.3s ease-in-out;
+}
+
+.menu a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    color: #090909;
+}
+
+.footer {
+    background-color: rgb(86, 15, 15);
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.donor-heading {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.donor-request-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between; /* Spread boxes evenly in the row */
+    margin-bottom: 20px; /* Increase margin between rows */
+}
+
+/* .boxa {
+    margin-top: 60px;
+    margin-left: 00px;
+    width: 250px; 
+    height: 150px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 10px; 
+    padding: 20px; 
+    position: relative; 
+} */
+
+.boxb {
+    margin-top: 90px;
+    margin-left: 60px;
+    width: 360px; /* Set width of boxes */
+    height: 180px; /* Set height of boxes */
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    font-size: 22px;
+    border-radius: 10px; /* Add border radius for rounded corners */
+    padding: 70px; /* Add padding to create space for + and - buttons */
+    position: relative; /* Position relative for absolute positioning of buttons */
+}
+
+/* .boxc {
+    margin-top: 270px;
+    margin-left: -620px;
+    width: 250px; 
+    height: 150px; 
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 10px;
+    padding: 20px; 
+    position: relative;
+} */
+
+/* .boxd {
+    margin-top: 270px;
+    margin-left: 120px;
+    width: 250px; 
+    height: 150px; 
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 10px; 
+    padding: 20px; 
+    position: relative; 
+} */
+
+.box:not(:last-child) {
+    margin-right: 40px; /* Add margin between boxes */
+}
+
+.number-control {
+    position: absolute; /* Position buttons absolutely */
+    bottom: 20px; /* Adjust vertical position of buttons */
+    left: 50%; /* Align buttons to center */
+    transform: translateX(-50%); /* Adjust to center buttons */
+}
+
+.number-control button {
+    background-color: #555;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: 0 5px; /* Add space between buttons */
+}
+
+.number-control button:hover {
+    background-color: #777;
+}
+
+    </style>
+
+</body>
+</html>

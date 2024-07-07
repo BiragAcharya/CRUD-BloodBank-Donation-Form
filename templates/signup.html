@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Blood Bank Management System</title>
+    <style>
+        * {
+            margin: 0;
+        
+            padding: 0;
+        }
+      
+        .main {
+            background: linear-gradient(
+                to bottom right,
+                rgb(136, 46, 46) 50%,
+                rgb(232, 138, 138) 50%
+            );
+            background-position: center;
+            background-size: cover;
+            height: 128vh;
+            position: relative;
+        }
+      
+        .navbar {
+            width: 100%;
+            height: 80px;
+            margin: auto;
+            background-color: rgba(255, 0, 0, 0.82);
+        }
+      
+        .logo {
+            color: rgb(242, 233, 237);
+            font-size: 30px;
+            font-family: Arial sans-serif;
+            padding-left: 20px;
+            float: left;
+            padding-top: 15px;
+        }
+      
+        .menu {
+            width: 550px;
+            float: left;
+            height: 85px;
+        }
+      
+        ul {
+            float: left;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+      
+        ul li {
+            list-style: none;
+            margin-left: 37px;
+            margin-top: 23px;
+            font-size: 20px;
+            display: inline-block;
+        }
+      
+        ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 19px;
+            font-family: Arial;
+            font-weight: bold;
+            transition: 0.4s ease-in-out;
+            padding: 6px 8px;
+        }
+      
+        ul li a:hover {
+            border-radius: 10px;
+            background: rgb(208, 12, 110);
+            color: rgb(15, 6, 9);
+            width: 800px;
+            height: 95px;
+        }
+      
+        .content {
+            height: auto;
+            margin: auto;
+            color: #fff;
+            position: relative;
+        }
+      
+        .content h1 {
+            font-family: "Times New Roman";
+            font-size: 35px;
+            padding-left: 50px;
+            margin-top: 15%;
+            letter-spacing: 2px;
+        }
+      
+        .footer {
+            width: 100%;
+            background-color: rgb(86, 15, 15);
+            color: white;
+            padding: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+      
+        .form {
+            width: 300px;
+            height: 560px;
+            background: linear-gradient(
+                to top,
+                rgba(0, 0, 0, 0.8) 50%,
+                rgba(0, 0, 0, 0.8) 50%
+            );
+            position: absolute;
+            top: 90px;
+            right: 11%;
+            border-radius: 10px;
+            padding: 25px;
+        }
+      
+        .form h2 {
+            width: 230px;
+            font-family: sans-serif;
+            text-align: center;
+            color: rgb(136, 46, 46);
+            font-size: 24px;
+            border-radius: 10px;
+            margin: 2px;
+            padding: 8px;
+        }
+      
+        .form input,
+        .form textarea {
+            width: 90%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid rgb(136, 46, 46);
+            background: transparent;
+            color: #fff;
+            font-size: 16px;
+            margin-top: 10px;
+            left: 80px;
+        }
+      
+        .form textarea {
+            height: 40px;
+        }
+      
+        .form input:focus,
+        .form textarea:focus {
+            outline: none;
+        }
+      
+        .btnn {
+            width: 225px;
+            height: 40px;
+            background: rgb(136, 46, 46);
+            border: none;
+            margin-top: 20px;
+            font-size: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            color: #fff;
+            transition: 0.4s ease;
+        }
+      
+        .btnn:hover {
+            background: #fff;
+            color: rgb(136, 46, 46);
+        }
+      
+        .btnn a {
+            text-decoration: none;
+            color: #0c0000;
+        }
+      
+        .form .link a {
+            text-decoration: none;
+            color: rgb(136, 46, 46);
+            font-size: 17px;
+            padding: 40px;
+        }
+      
+        .form label {
+            width: 230px;
+            font-family: poppins;
+            text-align: center;
+            color: rgb(248, 244, 244);
+            font-size: 20px;
+        }
+      
+        .form select {
+            width: 100px;
+            height: 25px;
+            background: rgb(136, 46, 46);
+            border: none;
+            margin-top: 10px;
+            font-size: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            color: #fff;
+            transition: 0.4s ease;
+            margin-bottom: 20px;
+        }
+      
+        .btnn:hover,
+        .form .userType select:hover {
+            background: #fff;
+            color: rgb(136, 46, 46);
+        }
+    </style>
+</head>
+<body>
+    <!-- Main container -->
+    <div class="main">
+        <!-- Navbar -->
+        <div class="navbar">
+            <div class="icon">
+                <h2 class="logo">Blood Bank Management System</h2>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="{% url 'login' %}">Home</a></li>
+                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                </ul>
+            </div>
+        </div>
+        <br><br><br>
+        <!-- Content section -->
+        <div class="content">
+            <h1>"DONATE BLOOD AND <br>BE THE REASON OF SMILE <br> TO MANY FACES"</h1>
+        </div>
+
+
+        <!-- Form section -->
+        <div class="form" >
+            <h2>Signup With</h2>
+        <form method="post">
+                {% csrf_token %}
+                <label for="userType">Select User Type:</label>
+                <select id="userType" name="userType">
+                    <option value="donor">Donor</option>
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                </select>
+
+                <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+                <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+                <input type="text" id="username" name="username" placeholder="Username" required>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <input type="number" id="age" name="age" placeholder="Age" required>
+                <input type="text" id="bloodGroup" name="bloodGroup" placeholder="Blood Group" required>
+                <textarea id="address" name="address" placeholder="Address" required></textarea>
+                <input type="number" id="phoneNo" name="phoneNo" type="number" placeholder="Phone No" required>
+                <button type="submit" class="btnn">Register</button>
+
+
+            </form>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Blood Bank Management System. All rights reserved.</p>
+    </footer>
+    <!-- <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const registerBtn = document.querySelector('.btnn');
+        
+            registerBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+        
+                const userType = document.getElementById('userType').value;
+                const firstName = document.getElementById('firstName').value.trim();
+                const lastName = document.getElementById('lastName').value.trim();
+                const username = document.getElementById('username').value.trim();
+                const password = document.getElementById('password').value.trim();
+                const age = document.getElementById('age').value.trim();
+                const bloodGroup = document.getElementById('bloodGroup').value.trim();
+                const address = document.getElementById('address').value.trim();
+                const phoneNo = document.getElementById('phoneNo').value.trim();
+        
+                // Perform validation
+                if (userType === '' || firstName === '' || lastName === '' || username === '' || password === '' || age === '' || bloodGroup === '' || address === '' || phoneNo === '') {
+                    alert('Please fill out all fields.');
+                    return;
+                }
+        
+                // Simulate registration (replace with actual registration logic)
+                alert('Registration successful!');
+            });
+        });
+    </script> -->
+
+</body>
+</html>

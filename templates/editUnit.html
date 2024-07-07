@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>User List</h1>
+        <div id="userList" class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Actions</th> <!-- New column for actions -->
+                    </tr>
+                </thead>
+                <tbody id="userData">
+                    <!-- User data will be dynamically added here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Function to fetch users and populate the list
+        function fetchUsers() {
+            fetch('/auth/users')
+                .then(response => response.json())
+                .then(data => {
+                    const userData = document.getElementById('userData');
+                    userData.innerHTML = ''; // Clear previous data
+                    data.forEach(user => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${user.id}</td>
+                            <td>${user.name}</td>
+                            <td>${user.email}</td>
+                            <td>
+                                <select id="role-${user.id}">
+                                    <option value="admin" ${user.role === 'admin' ? 'selected' : ''}>Admin</option>
+                                    <option value="user" ${user.role === 'user' ? 'selected' : ''}>User</option>
+                                    <!-- Add more role options if needed -->
+                                </select>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary btn-sm" onclick="updateUserRole(${user.id})">Done</button>
+                            </td>
+                        `;
+                        userData.appendChild(row);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching users:', error);
+                });
+        }
+
+        // Fetch users when the page loads
+        fetchUsers();
+
+        // Function to handle updating a user's role
+        function updateUserRole(userId) {
+            const selectedRole = document.getElementById(role-${userId}).value;
+
+            // Send a request to the backend API to update the user role
+            fetch(/auth/updateUserRole/${userId}, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ role: selectedRole })
+            })
+            .then(response => {
+                if (response.ok) {
+                    // If the user role is successfully updated, fetch the updated user list
+                    fetchUsers();
+                } else {
+                    // Handle errors if the role update fails
+                    console.error('Failed to update user role');
+                }
+            })
+            .catch(error => {
+                console.error('Error updating user role:', error);
+            });
+        }
+    </script>
+</body>
+</html>
